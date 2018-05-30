@@ -63,11 +63,16 @@ var foodGiphs = ["hamburger","pasta","pizza","brownies","avocado"];
         for (var j = 0; j < 10; j++) {
 
           if (results[j].rating !== "r" && results[j].rating !== "pg-13") {
+
             var gifDiv = $("<div class='item'>");
             var rating = results[j].rating;
             var p = $("<p>").text("Rating: " + rating);
             var foodImage = $("<img>");
-            foodImage.attr("src", results[j].images.fixed_height.url);
+            foodImage.addClass("foodStateGifs");
+            foodImage.attr("src", results[j].images.fixed_height_still.url);
+            foodImage.attr("data-animate", results[j].images.fixed_height.url);
+            foodImage.attr("data-still", results[j].images.fixed_height_still.url);
+            foodImage.attr("data-state", "still");
             gifDiv.append(p);
             gifDiv.append(foodImage);
             $("#gifs-appear-here").prepend(gifDiv);
@@ -76,6 +81,20 @@ var foodGiphs = ["hamburger","pasta","pizza","brownies","avocado"];
       });
 
   };
+
+//change the state of the gif when the user clicks it
+  $(document).on("click", ".foodStateGifs", function() {
+      console.log("test");
+    var state = $(this).attr("data-state");
+    if ( state == 'still'){
+        $(this).attr('src', $(this).data('animate'));
+        $(this).attr('data-state', 'animate');
+    }else{
+        $(this).attr('src', $(this).data('still'));
+        $(this).attr('data-state', 'still');
+    }
+  });
+
        renderButtons();
 
       $(document).on("click", ".food", produceGifs);
