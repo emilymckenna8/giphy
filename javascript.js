@@ -41,7 +41,8 @@ var foodGiphs = ["hamburger","pasta","pizza","brownies","avocado"];
 
 
     function produceGifs() {
-
+    
+        $("#gifs-appear-here").empty();
     var buttonFood = $(this).attr("data-name");
 
 
@@ -59,7 +60,7 @@ var foodGiphs = ["hamburger","pasta","pizza","brownies","avocado"];
         var results = response.data;
 
 
-        for (var j = 0; j < 1; j++) {
+        for (var j = 0; j < 10; j++) {
 
           if (results[j].rating !== "r" && results[j].rating !== "pg-13") {
             var gifDiv = $("<div class='item'>");
